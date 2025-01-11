@@ -1,10 +1,13 @@
-class ship {
+export class ship {
+  id;
   size;
   health;
   isSunk = false;
+  coordinates;
   constructor(len) {
     this.size = len;
     this.health = len;
+    this.id = len;
   }
   onHit() {
     if (this.health > 1) {
@@ -12,5 +15,8 @@ class ship {
     } else {
       this.isSunk = true;
     }
+  }
+  setCoordinates(lst) {
+    this.coordinates = lst;
   }
 }

@@ -1,5 +1,5 @@
 const { gameBoard } = require("./gameboard");
-const { ship } = require("./ship.js");
+import { ship } from "./ship";
 
 export class player {
   name;
@@ -34,5 +34,9 @@ export class player {
 
   shipChangeDir(shipId) {
     ships[shipId].changeDir;
+  }
+
+  startGame() {
+    this.gameboard.inProgress = 1;
   }
 }

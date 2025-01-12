@@ -1,4 +1,4 @@
-class gameBoard {
+export class gameBoard {
   rows = 7;
   columns = 7;
   owner;
@@ -15,8 +15,9 @@ class gameBoard {
 
   missileHit(x, y) {
     if (this.board[x][y] === 0) this.board[x][y] = -1;
-    if (this.board[x][y] > 0) {
+    else if (this.board[x][y] > 0) {
       //code to find out ship and call ship.onHit
+      this.board[x][y] = -1;
     } else {
       //ask player to repeat coordinate set up
     }

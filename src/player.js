@@ -33,7 +33,8 @@ export class player {
   }
 
   shipChangeDir(shipId) {
-    ships[shipId].changeDir;
+    ships[shipId].changeDir();
+    board.changeDir(ships[shipId]);
   }
 
   startGame() {

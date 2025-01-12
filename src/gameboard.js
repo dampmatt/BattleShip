@@ -17,9 +17,16 @@ export class gameBoard {
     return Array.from({ length: this.rows }, () => Array(this.columns).fill(0));
   }
 
+  initiateGame() {
+    this.inProgress = 1;
+  }
+  endGame() {
+    this.isOver = 1;
+  }
+
   missileHit(x, y) {
-    if ((this.inProgress = 0)) {
-      this.inProgress = 1;
+    if (!this.inProgress) {
+      this.initiateGame();
     }
     var result = 0;
     if (this.board[x][y] === 0) this.board[x][y] = -1;
@@ -27,8 +34,10 @@ export class gameBoard {
       //code to find out ship and call ship.onHit
       this.owner.ships[this.board[x][y]].onHit();
       this.board[x][y] = -1;
-      result = 1;
+      result = 2;
       this.pointCounter();
+    } else {
+      result = 1;
     }
     return result;
   }
@@ -59,10 +68,27 @@ export class gameBoard {
     }
   }
 
+  shipDirChange(ship) {
+    if (!this.inProgress) {
+      if (ship.dir === 1) {
+        for (let i = 0; i < ship.len; i++) {
+          this.board[x][y] = 0;
+          y++;
+        }
+      } else {
+        for (let i = 0; i < ship.len; i++) {
+          this.board[x][y] = 0;
+          y++;
+        }
+      }
+      this.shipSetUp(ship);
+    }
+  }
+
   pointCounter() {
     this.pointer--;
-    if (pointer === 0) {
-      isOver = 1;
+    if (this.pointer === 0) {
+      this.endGame();
     }
   }
 }

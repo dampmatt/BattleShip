@@ -1,3 +1,6 @@
+import { player } from "./player";
+import { ship } from "./ship.js";
+
 export class gameBoard {
   rows = 7;
   columns = 7;
@@ -23,18 +26,29 @@ export class gameBoard {
     }
   }
 
-  shipSetUp(x, y, dir) {
-    if (dir === 0) {
-      //horizontal
-      if (/*x-coordinate < rows-ship.len*/ 1)
-        //plce ship horizontally
-        x = 1;
-      else {
-        //place ship vertically
-        y = 1;
+  shipSetUp(ship) {
+    var x = ship.coordinates[0];
+    var y = ship.coordinates[1];
+    if (ship.dir === 0) {
+      if (ship.coordinates[1] + ship.len < ship.columns) {
+        var x = ship.coordinates[0];
+        var y = ship.coordinates[1];
+        for (let i = 0; i < ship.len; i++) {
+          this.board[x][y] = ship.len;
+          y++;
+        }
+      } else {
+        //code to show error
       }
     } else {
-      // do this vertically
+      if (ship.coordinates[0] + ship.len < ship.columns) {
+        for (let i = 0; i < ship.len; i++) {
+          this.board[x][y] = ship.len;
+          y++;
+        }
+      } else {
+        //code to show error
+      }
     }
   }
 

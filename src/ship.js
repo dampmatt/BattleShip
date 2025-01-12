@@ -4,11 +4,12 @@ export class ship {
   health;
   isSunk = false;
   coordinates;
-  constructor(len, x, y, dir) {
+  dir = 0;
+  constructor(id, len, lst, dir) {
     this.size = len;
     this.health = len;
-    this.id = len;
-    this.setCoordinates(x, y, dir);
+    this.id = id;
+    this.setCoordinates(lst, dir);
   }
   onHit() {
     if (this.health > 1) {
@@ -17,7 +18,11 @@ export class ship {
       this.isSunk = true;
     }
   }
-  setCoordinates(lst) {
+  setCoordinates(lst, dir) {
     this.coordinates = lst; //lst is an object containing x,y and dir of ship
+    this.dir = dir;
+  }
+  changeDir() {
+    dir = dir & 0;
   }
 }

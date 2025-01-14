@@ -22,22 +22,13 @@ export class player {
   placeShips(lst, len, dir) {
     var id = this.ships.length || 0;
     var ship = new ship(id, len, lst, dir);
-    this.ships.push(ship);
-    this.gameboard.shipSetUp(ship);
-  }
-
-  hitMissile(x, y, Board) {
-    //hit missile on enemy gameboard.
-    var result = Board.missileHit(x, y);
+    var result = this.gameboard.shipSetUp(ship);
+    if (result) this.ships.push(ship);
     return result;
   }
 
   shipChangeDir(shipId) {
     ships[shipId].changeDir();
     board.changeDir(ships[shipId]);
-  }
-
-  startGame() {
-    this.gameboard.inProgress = 1;
   }
 }

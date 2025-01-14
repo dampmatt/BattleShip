@@ -42,6 +42,7 @@ class game {
         //correct shot. Do agains
       } else if (result === 2) {
         //correct shot. Game Won
+        this.winner = "computer";
         this.endGame();
       } else {
         //error
@@ -51,7 +52,7 @@ class game {
 
   humanTurn(x, y) {
     if ((this.currentTurn = "player1")) {
-      var result = this.computer.gameboard.hitMissile(x, y);
+      var result = this.computer.gameboard.missileHit(x, y);
       if (result === -1) {
         this.currentTurn = "computer";
         this.computerTurn();
@@ -63,6 +64,7 @@ class game {
           //correct shot. Do agains
         } else if (result === 2) {
           //correct shot. Game Won
+          this.winner = "Human";
           this.endGame();
         } else {
           //error
@@ -77,6 +79,5 @@ class game {
   }
   endGame() {
     this.iSfinished = 1;
-    this.winner = "computer";
   }
 }

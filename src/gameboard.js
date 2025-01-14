@@ -1,16 +1,16 @@
-import { player } from "./player";
+import { ship } from "./ship";
 
 export class gameBoard {
-  inProgress = 0;
-  isOver = 0;
-  rows = 7;
-  columns = 7;
-  owner;
-  points = 10;
   constructor(owner) {
-    this.owner = owner;
     this.board = this.initializeGameboard();
     this.pointer = 10;
+    this.points = 10;
+    this.ships = [];
+    this.owner = owner;
+    this.inProgress = 0;
+    this.isOver = 0;
+    this.rows = 7;
+    this.columns = 7;
   }
 
   initializeGameboard() {
@@ -21,7 +21,7 @@ export class gameBoard {
     this.inProgress = 1;
   }
   endGame() {
-    return 3;
+    return 2;
   }
 
   missileHit(x, y) {
@@ -32,7 +32,7 @@ export class gameBoard {
     if (this.board[x][y] === 0) this.board[x][y] = -1;
     else if (this.board[x][y] > 0) {
       //code to find out ship and call ship.onHit
-      this.owner.ships[this.board[x][y]].onHit();
+      this.ships[this.board[x][y]].onHit();
       this.board[x][y] = -1;
       result = this.pointCounter();
     } else {
@@ -53,6 +53,14 @@ export class gameBoard {
         currX--;
       }
     }
+  }
+
+  placeShips(lst, len, dir) {
+    var id = this.ships.length || 0;
+    var Ship = new ship(id, len, lst, dir);
+    var result = this.board.shipSetUp(Ship);
+    if (result) this.ships.push(Ship);
+    return result;
   }
 
   shipSetUp(ship) {

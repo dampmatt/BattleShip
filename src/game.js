@@ -72,7 +72,6 @@ class game {
   }
 
   gameStarted() {
-    this.inProgress = 1;
     this.player1.gameboard.initiateGame();
     this.computer.gameboard.initiateGame();
   }

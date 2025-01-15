@@ -37,9 +37,24 @@ describe("testing place ships method:", () => {
   test("testing for overlap part2", () => {
     gameboard.placeShips([0, 0], 4, 1);
     expect(gameboard.placeShips([2, 0], 2, 0)).toBe(0);
-    console.log(gameboard.board);
+    // console.log(gameboard.board);
   });
   test("edge cases", () => {
     expect(gameboard.placeShips([6, 6], 2, 0)).toBe(2);
+  });
+});
+
+describe("missileHit method tests", () => {
+  const exampleGameboard = new gameBoard("utkarsh");
+  var result = exampleGameboard.placeShips([0, 0], 4, 1);
+  // console.log(exampleGameboard.board);
+  exampleGameboard.initiateGame();
+  console.log(exampleGameboard.ships);
+  test("if missile hits an unmarked position", () => {
+    expect(exampleGameboard.missileHit(4, 4)).toBe(-1);
+    // console.log(exampleGameboard.board);
+  });
+  test("if missile hits marked position:", () => {
+    expect(exampleGameboard.missileHit(0, 0)).toBe(0);
   });
 });

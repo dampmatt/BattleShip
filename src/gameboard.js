@@ -28,11 +28,11 @@ export class gameBoard {
     if (!this.inProgress) {
       this.initiateGame();
     }
-    var result = 0;
+    var result = -1;
     if (this.board[x][y] === 0) this.board[x][y] = -1;
     else if (this.board[x][y] > 0) {
       //code to find out ship and call ship.onHit
-      this.ships[this.board[x][y]].onHit();
+      this.ships[this.board[x][y] - 1].onHit();
       this.board[x][y] = -1;
       result = this.pointCounter();
     } else {
@@ -56,7 +56,7 @@ export class gameBoard {
   }
 
   placeShips(lst, len, dir) {
-    var id = this.ships.length || 0;
+    var id = this.ships.length + 1;
     var Ship = new ship(id, len, lst, dir);
     var result = this.shipSetUp(Ship);
     if (result) this.ships.push(Ship);

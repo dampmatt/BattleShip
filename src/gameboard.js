@@ -1,6 +1,8 @@
 import { ship } from "./ship";
 
 export class gameBoard {
+  rows = 7;
+  columns = 7;
   constructor(owner) {
     this.board = this.initializeGameboard();
     this.pointer = 10;
@@ -9,8 +11,6 @@ export class gameBoard {
     this.owner = owner;
     this.inProgress = 0;
     this.isOver = 0;
-    this.rows = 7;
-    this.columns = 7;
   }
 
   initializeGameboard() {
@@ -58,7 +58,7 @@ export class gameBoard {
   placeShips(lst, len, dir) {
     var id = this.ships.length || 0;
     var Ship = new ship(id, len, lst, dir);
-    var result = this.board.shipSetUp(Ship);
+    var result = this.shipSetUp(Ship);
     if (result) this.ships.push(Ship);
     return result;
   }
@@ -66,7 +66,7 @@ export class gameBoard {
   shipSetUp(ship) {
     const {
       coordinates: [x, y],
-      len,
+      size,
       dir,
       id,
     } = ship;
@@ -76,11 +76,12 @@ export class gameBoard {
     if (this.inProgress) return -1;
 
     const canPlaceShip =
-      dir === 0 ? y + len <= this.columns : x + len <= this.rows;
+      dir === 0
+        ? y + size <= this.columns && y + size >= 0
+        : x + size <= this.rows && x + size >= 0;
+    if (!canPlaceShip) return 2;
 
-    if (!canPlaceShip) return 0;
-
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < size; i++) {
       if (this.board[mainX][mainY] !== 0) {
         this.revertChanges(x, y, mainX, mainY, dir);
         return 0;

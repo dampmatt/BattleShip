@@ -44,13 +44,13 @@ export class gameBoard {
   revertChanges(x, y, currX, currY, dir) {
     if (dir === 0) {
       while (currY != y) {
-        this.board[currX][currY] = 0;
         currY--;
+        this.board[currX][currY] = 0;
       }
     } else {
       while (currX != x) {
-        this.board[currX][currY] = 0;
         currX--;
+        this.board[currX][currY] = 0;
       }
     }
   }
@@ -70,6 +70,8 @@ export class gameBoard {
       dir,
       id,
     } = ship;
+
+    console.log(ship);
     let mainX = x,
       mainY = y;
 
@@ -96,20 +98,27 @@ export class gameBoard {
   shipDirChange(ship) {
     var x = ship.coordinates[0];
     var y = ship.coordinates[1];
+    var result = -1;
     if (!this.inProgress) {
       if (ship.dir === 1) {
-        for (let i = 0; i < ship.len; i++) {
+        for (let i = 0; i < ship.size; i++) {
           this.board[x][y] = 0;
-          y++;
+          x++;
         }
       } else {
-        for (let i = 0; i < ship.len; i++) {
+        for (let i = 0; i < ship.size; i++) {
           this.board[x][y] = 0;
           y++;
         }
       }
-      this.shipSetUp(ship);
+      ship.changeDir();
+      result = this.shipSetUp(ship);
+      if (result === 2 || result === 0) {
+        ship.changeDir();
+        this.shipSetUp(ship);
+      }
     }
+    return result;
   }
 
   pointCounter() {

@@ -23,6 +23,7 @@ export class ship {
     this.dir = dir;
   }
   changeDir() {
-    dir = dir & 0;
+    if (this.dir === 0) this.dir = 1;
+    else this.dir = 0;
   }
 }

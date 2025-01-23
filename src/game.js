@@ -69,25 +69,25 @@ export class game {
 
   humanTurn(x, y) {
     if (this.currentState !== this.states.PLAYER_TURN) return;
-    if ((this.currentTurn = "player1")) {
-      var result = this.computer.missileHit(x, y);
-      if (result === -1) {
-        this.currentTurn = "computer";
-        this.computerTurn();
-        //blank but correct shot, next turn
-      } else if (result === 1) {
-        //incorrect shot, do again
-        return 0;
-      } else {
-        if (result === 0) {
-          //correct shot. Do agains
-          return 1;
-        } else if (result === 2) {
-          //correct shot. Game Won
-          this.endGame("player1");
-        }
+
+    var result = this.computer.missileHit(x, y);
+    if (result === 0) {
+      this.currentTurn = "computer";
+      return 0;
+      // this.computerTurn();
+      //blank but correct shot, next turn
+    } else {
+      if (result === 2) {
+        //correct shot. Game Won
+        this.endGame("player1");
+        return 2;
       }
     }
+    return result;
+
+    //returns 0-> if shot missed
+    //returns 1->shot placed
+    //returns -1 -> if incorrect shot
   }
 
   endGame(winner) {

@@ -20,24 +20,26 @@ export class gameBoard {
   initiateGame() {
     this.inProgress = 1;
   }
-  endGame() {
-    return 2;
-  }
 
   missileHit(x, y) {
     if (!this.inProgress) {
       this.initiateGame();
     }
     var result = -1;
-    if (this.board[x][y] === 0) this.board[x][y] = -1;
-    else if (this.board[x][y] > 0) {
+    if (this.board[x][y] === 0) {
+      this.board[x][y] = -1;
+      result = 0;
+    } else if (this.board[x][y] > 0) {
       //code to find out ship and call ship.onHit
       this.board[x][y] = -1;
       result = this.pointCounter();
-    } else {
-      result = 1;
     }
     return result;
+
+    //return -1 if incorrect shot
+    //return 0 if correct but misplaced shot
+    //return 1 if correct placed shot but game not over
+    //return 2 if correct shot and game over.
   }
 
   revertChanges(x, y, currX, currY, dir) {
@@ -127,8 +129,8 @@ export class gameBoard {
   pointCounter() {
     this.pointer--;
     if (this.pointer === 0) {
-      return this.endGame();
+      return 2;
     }
-    return 0;
+    return 1;
   }
 }

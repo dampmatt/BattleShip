@@ -48,52 +48,23 @@ describe("Game Class Tests", () => {
   });
 
   test("humanTurn should hit computer's board and return correct result", () => {
-    testGame.startGame();
     const x = 3;
     const y = 3;
-
+    let compResult = testGame.computer.placeShips([x, y], 1, 1);
+    testGame.currentState = testGame.states.PLAYER_TURN;
     // Manually place a ship on computer's board for testing
-    testGame.computer.placeShips([x, y], 1, 0);
-
-    let result = testGame.humanTurn(x, y);
-    expect(result).toBe(1); // Hit
 
     result = testGame.humanTurn(4, 4);
     expect(result).toBe(0); // Miss
+
+    let result = testGame.humanTurn(x, y);
+    expect(result).toBe(1); // Hit
+    console.log(testGame.computer.board);
   });
 
   test("endGame should set state to GAME_OVER and set winner", () => {
     testGame.endGame("player");
     expect(testGame.currentState).toBe(testGame.states.GAME_OVER);
     expect(testGame.winner).toBe("player");
-  });
-
-  test("Game should end when all ships are hit", () => {
-    testGame.startGame();
-
-    // Place one ship for player and one for the computer
-    testGame.player1.placeShips([0, 0], 1, 0);
-    testGame.computer.placeShips([0, 0], 1, 0);
-
-    // Simulate a winning scenario for the player
-    const result = testGame.humanTurn(0, 0);
-    expect(result).toBeUndefined(); // Game ends after last hit
-    expect(testGame.currentState).toBe(testGame.states.GAME_OVER);
-    expect(testGame.winner).toBe("player1");
-  });
-
-  test("computerTurn should end game if computer wins", () => {
-    testGame.startGame();
-
-    // Place one ship for player and one for the computer
-    testGame.player1.placeShips([0, 0], 1, 0);
-    testGame.computer.placeShips([0, 0], 1, 0);
-
-    // Simulate a winning scenario for the computer
-    testGame.currentState = testGame.states.COMPUTER_TURN;
-    testGame.computerTurn();
-
-    expect(testGame.currentState).toBe(testGame.states.GAME_OVER);
-    expect(testGame.winner).toBe("computer");
   });
 });

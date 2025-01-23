@@ -17,6 +17,7 @@ export class ship {
     } else {
       this.isSunk = true;
     }
+    return this.isSunk;
   }
   setCoordinates(lst, dir) {
     this.coordinates = lst; //lst is an object containing x,y and dir of ship

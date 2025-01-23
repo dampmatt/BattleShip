@@ -1,83 +1,98 @@
 import { gameBoard } from "./gameboard";
-import { player } from "./player";
-import { ship } from "./ship";
 
-class game {
+export class game {
+  states = {
+    INITIALIZING: "INITIALIZING",
+    PLAYER_TURN: "PLAYER_TURN",
+    COMPUTER_TURN: "COMPUTER_TURN",
+    GAME_OVER: "GAME_OVER",
+  };
+
+  currentState;
   player1;
   computer;
-  inProgress = 0;
-  iSfinished = 0;
-  currentTurn;
-  winner = "";
+  winner;
 
   constructor(name) {
-    this.player1 = new player(name);
-    this.computer = new player("computer");
-    this.currentTurn = "player1";
+    this.player1 = new gameBoard(name);
+    this.computer = new gameBoard("computer");
+    this.currentState = this.states.INITIALIZING;
+    this.winner = null;
+  }
+
+  startGame() {
+    if (this.currentState !== "INITIALIZING") return;
+    this.generateComputerShipCoordinates();
+    this.player1.initiateGame();
+    this.computer.initiateGame();
+    this.currentState = this.states.PLAYER_TURN;
   }
 
   generateComputerShipCoordinates() {
-    //code to generate random coordinates,directions and length for computer
+    var x = 1;
     for (let i = 1; i <= 4; i++) {
       var x = Math.floor(Math.random() * 7);
       var y = Math.floor(Math.random() * 7);
       var dir = Math.floor(Math.random() * 2);
       var result = this.computer.placeShips([x, y], i, dir);
-      if (!result) i--;
+      if (!(result === 1)) {
+        i--;
+        x--;
+      }
+
+      x++;
     }
+    return x;
   }
 
   computerTurn() {
+    if (this.currentState !== this.states.COMPUTER_TURN) return;
     var x = Math.floor(Math.random() * 7);
     var y = Math.floor(Math.random() * 7);
-    var result = this.player1.gameboard.missileHit(x, y);
+    var result = this.player1.missileHit(x, y);
     if (result === -1) {
       //blank but correct shot, next turn
-      this.currentTurn = "player1";
+      this.currentState = this.states.PLAYER_TURN;
     } else if (result === 1) {
       //incorrect shot, do again
       this.computerTurn();
     } else {
       if (result === 0) {
         //correct shot. Do agains
+        this.computerTurn();
       } else if (result === 2) {
         //correct shot. Game Won
-        this.winner = "computer";
-        this.endGame();
-      } else {
-        //error
+        this.endGame("computer");
       }
     }
   }
 
   humanTurn(x, y) {
+    if (this.currentState !== this.states.PLAYER_TURN) return;
     if ((this.currentTurn = "player1")) {
-      var result = this.computer.gameboard.missileHit(x, y);
+      var result = this.computer.missileHit(x, y);
       if (result === -1) {
         this.currentTurn = "computer";
         this.computerTurn();
         //blank but correct shot, next turn
       } else if (result === 1) {
         //incorrect shot, do again
+        return 0;
       } else {
         if (result === 0) {
           //correct shot. Do agains
+          return 1;
         } else if (result === 2) {
           //correct shot. Game Won
-          this.winner = "Human";
-          this.endGame();
-        } else {
-          //error
+          this.endGame("player1");
         }
       }
     }
   }
 
-  gameStarted() {
-    this.player1.gameboard.initiateGame();
-    this.computer.gameboard.initiateGame();
-  }
-  endGame() {
-    this.iSfinished = 1;
+  endGame(winner) {
+    this.currentState = this.states.GAME_OVER;
+    this.winner = winner;
+    console.log(`${winner} wins the game!`);
   }
 }

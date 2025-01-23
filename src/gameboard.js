@@ -32,7 +32,6 @@ export class gameBoard {
     if (this.board[x][y] === 0) this.board[x][y] = -1;
     else if (this.board[x][y] > 0) {
       //code to find out ship and call ship.onHit
-      this.ships[this.board[x][y] - 1].onHit();
       this.board[x][y] = -1;
       result = this.pointCounter();
     } else {
@@ -59,8 +58,13 @@ export class gameBoard {
     var id = this.ships.length + 1;
     var Ship = new ship(id, len, lst, dir);
     var result = this.shipSetUp(Ship);
-    if (result) this.ships.push(Ship);
+    if (result == 1) this.ships.push(Ship);
     return result;
+
+    //returns -1 if game already in progress
+    //returns 0 if there is another ship in the path
+    //returns 1 if ship successfully set
+    // returns 2 if out of bounds
   }
 
   shipSetUp(ship) {
@@ -71,7 +75,6 @@ export class gameBoard {
       id,
     } = ship;
 
-    console.log(ship);
     let mainX = x,
       mainY = y;
 

@@ -65,7 +65,6 @@ function renderPlayerBoard() {
       heading.style.visibility = "visible";
     }
   } else if (result[0] === 0) {
-    // console.log(cell);
     cell.classList.remove("cells");
     cell.classList.add("miss");
   }
@@ -77,7 +76,6 @@ function renderGameState(event) {
   const r = Number(idParts[1][0]);
   const c = Number(idParts[1][1]);
   var result = Game.humanTurn(r, c);
-  console.log(result);
   if (result[0] === 1 || result[0] === 2) {
     cell.classList.remove("cells");
     cell.classList.add("hit");
@@ -94,7 +92,6 @@ function renderGameState(event) {
       }
     });
     if (result[0] === 2) {
-      // console.log(result);
       const heading = document.querySelector("#winner-headline");
       heading.innerHTML = "<h1>PLayer Wins<h1>";
       heading.style.visibility = "visible";

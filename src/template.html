@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>BattleShip</title>
     <script
       src="https://kit.fontawesome.com/f3ad2d5717.js"
       crossorigin="anonymous"
@@ -21,10 +21,13 @@
         </div>
         <div id="button-container">
           <button class="header-buttons" type="button" id="start-game-btn">
-            Start New Game
+            Start Game
           </button>
           <button class="header-buttons" id="randomize-btn" type="button">
             Randomize
+          </button>
+          <button class="header-buttons" type="submit" id="start-new-game-btn">
+            Start New Game
           </button>
         </div>
       </div>
@@ -34,7 +37,7 @@
             <h1>Player</h1>
           </div>
           <div id="player-details" class="details">
-            <ul>
+            <ul id="player-list">
               <li id="player-carrier">
                 <b>Carrier</b>
                 <br />
@@ -70,7 +73,7 @@
             <h1>Computer</h1>
           </div>
           <div id="computer-details" class="details">
-            <ul>
+            <ul id="computer-list">
               <li id="computer-carrier">
                 <b>Carrier</b>
                 <br />

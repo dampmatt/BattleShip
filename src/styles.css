@@ -35,7 +35,7 @@ body {
 }
 
 #winner-headline {
-  /* visibility: hidden; */
+  visibility: hidden;
   text-align: center;
   padding: 20px;
 }
@@ -93,14 +93,35 @@ body {
 
 #player-grid,
 #computer-grid {
-  background-color: black;
-  width: 20vw;
-  height: 60%;
+  /* background-color: black; */
+  width: 25vw;
+  height: 50vh;
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 5px;
+  column-gap: 5px;
 }
 
 .unhit {
   color: greenyellow;
 }
 .hit {
+  background-color: rgb(238, 139, 139);
   color: rgb(238, 139, 139);
+}
+.miss {
+  background-color: rgb(243, 243, 109);
+}
+
+.cells {
+  background-color: white;
+}
+.occupied {
+  background-color: greenyellow;
+}
+#computer-grid > .cells:hover {
+  cursor: pointer;
+  box-shadow: 5px 1px 1px black;
+  background-color: #a0a4a6;
 }

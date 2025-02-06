@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BattleShip</title>
+    <script
+      src="https://kit.fontawesome.com/f3ad2d5717.js"
+      crossorigin="anonymous"
+    ></script>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div id="header-container">
+      <h1 id="heading">BattleShip Game</h1>
+    </div>
+
+    <div id="main-container">
+      <div id="main-container-header">
+        <div id="winner-headline">
+          <h1>Player-1 Wins</h1>
+        </div>
+        <div id="button-container">
+          <button class="header-buttons" type="button" id="start-game-btn">
+            Start Game
+          </button>
+          <button class="header-buttons" id="randomize-btn" type="button">
+            Randomize
+          </button>
+          <button class="header-buttons" type="submit" id="start-new-game-btn">
+            Start New Game
+          </button>
+        </div>
+      </div>
+      <div id="grids">
+        <div id="player-container" class="grid-container-items">
+          <div id="player-heading">
+            <h1>Player</h1>
+          </div>
+          <div id="player-details" class="details">
+            <ul id="player-list">
+              <li id="player-carrier">
+                <b>Carrier</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+              <li id="player-battleship">
+                <b>Battleship</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+              <li id="player-">
+                <b>Destroyer</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+              <li id="player-">
+                <b>boat</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+            </ul>
+          </div>
+          <div id="player-grid"></div>
+        </div>
+        <div id="computer-container" class="grid-container-items">
+          <div id="player-heading">
+            <h1>Computer</h1>
+          </div>
+          <div id="computer-details" class="details">
+            <ul id="computer-list">
+              <li id="computer-carrier">
+                <b>Carrier</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+              <li id="computer-battleship">
+                <b>Battleship</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+              <li id="computer-destroyer">
+                <b>Destroyer</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+              <li id="computer-boat">
+                <b>boat</b>
+                <br />
+                <i class="fa-solid fa-square unhit"></i>
+              </li>
+            </ul>
+          </div>
+          <div id="computer-grid"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
